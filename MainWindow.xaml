@@ -1,0 +1,24 @@
+﻿<Window x:Class="AgencyManager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AgencyManager"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
+    <Canvas Name="Container">
+        <StackPanel Canvas.Top="25" Canvas.Left="400">
+            <TextBlock FontWeight="Bold">Número</TextBlock>
+            <TextBlock Name="TxtNumero"></TextBlock>
+            <TextBlock FontWeight="Bold">Nome</TextBlock>
+            <TextBlock Name="TxtNome"></TextBlock>
+            <TextBlock FontWeight="Bold">Telefone</TextBlock>
+            <TextBlock Name="TxtTelefone"></TextBlock>
+            <TextBlock FontWeight="Bold">Descrição</TextBlock>
+            <TextBlock Name="TxtDescricao"></TextBlock>
+            <TextBlock FontWeight="Bold">Endereço</TextBlock>
+            <TextBlock Name="TxtEndereco"></TextBlock>
+        </StackPanel>
+        <Button Name="BtnExcluir" Content="Excluir" Canvas.Left="630" Canvas.Top="335" Height="30" Width="150" HorizontalAlignment="Left" VerticalAlignment="Center" Click="BtnExcluir_Click"/>
+    </Canvas>
+</Window>
