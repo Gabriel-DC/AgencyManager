@@ -20,5 +20,6 @@
             <TextBlock Name="TxtEndereco"></TextBlock>
         </StackPanel>
         <Button Name="BtnExcluir" Content="Excluir" Canvas.Left="630" Canvas.Top="335" Height="30" Width="150" HorizontalAlignment="Left" VerticalAlignment="Center" Click="BtnExcluir_Click"/>
+        <Button Name="BtnEditar" Content="Editar" Canvas.Left="470" Canvas.Top="335" Height="30" Width="150" HorizontalAlignment="Left" VerticalAlignment="Center"/>
     </Canvas>
 </Window>

@@ -1,6 +1,7 @@
 ﻿using AgencyManager.Components;
 using AgencyManager.DatabaseContext;
 using AgencyManager.Models;
+using AgencyManager.Views;
 using Microsoft.EntityFrameworkCore;
 using System.Text;
 using System.Windows;
@@ -35,6 +36,8 @@ namespace AgencyManager
 
             Canvas.SetTop(_agencyListBox, 15);
             Canvas.SetLeft(_agencyListBox, 15);
+
+            BtnEditar.Click += new RoutedEventHandler(BtnEditar_Clicked);
         }
 
         private async Task AtualizarControles()
@@ -45,11 +48,18 @@ namespace AgencyManager
             var agencies = await _dbContext.Agencies.ToListAsync();
 
             foreach (var agency in agencies)
-                _agencyListBox.Items.Add(agency);
+                _agencyListBox.Items.Add(agency);            
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
             => await AtualizarControles();
+
+        private async void BtnEditar_Clicked(object sender, RoutedEventArgs e)
+        {
+            EditAgency editAgency = new();
+
+            editAgency.ShowDialog();
+        }
 
         private async void BtnExcluir_Click(object sender, RoutedEventArgs e)
         {
