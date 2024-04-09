@@ -53,7 +53,7 @@ namespace AgencyManager
 
         private async void BtnExcluir_Click(object sender, RoutedEventArgs e)
         {
-            Agency selectedAgency = (Agency)_agencyListBox.SelectedItem;
+            Agency selectedAgency = _agencyListBox.SelectedAgency;
 
             if (selectedAgency is null)
                 return;

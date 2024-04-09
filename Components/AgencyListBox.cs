@@ -17,9 +17,11 @@ namespace AgencyManager.Components
             _parentWindow = mainWindow ?? throw new ArgumentNullException(nameof(mainWindow));
         }
 
+        public Agency SelectedAgency => (Agency)SelectedItem;
+
         protected override void OnSelectionChanged(SelectionChangedEventArgs e)
         {
-            base.OnSelectionChanged(e);
+            base.OnSelectionChanged(e);            
 
             Agency selectedAgency = (Agency)SelectedItem;
 
