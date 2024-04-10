@@ -22,8 +22,8 @@
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Right"
                         Margin="0,10">
-                <Button Content="OK" Margin="15,0" Padding="5"/>
-                <Button Content="Cancelar"/>
+                <Button Name="BtnOk" Content="OK" Margin="15,0" Padding="5"/>
+                <Button Name="BtnCancelar" Content="Cancelar"/>
             </StackPanel>
             
         </StackPanel>

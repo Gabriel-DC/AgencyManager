@@ -54,11 +54,25 @@ namespace AgencyManager
         private async void Window_Loaded(object sender, RoutedEventArgs e)
             => await AtualizarControles();
 
-        private async void BtnEditar_Clicked(object sender, RoutedEventArgs e)
+        private void BtnEditar_Clicked(object sender, RoutedEventArgs e)
         {
-            EditAgency editAgency = new();
+            if (_agencyListBox.SelectedAgency is null)
+                return;
 
-            editAgency.ShowDialog();
+            EditAgency editAgency = new(_agencyListBox.SelectedAgency);
+
+            bool? result = editAgency.ShowDialog();
+
+            if(!result.HasValue) return;
+
+            if(result.Value)
+            {
+                // UPDATE
+            }
+            else
+            {
+                //NOTHING YET
+            }
         }
 
         private async void BtnExcluir_Click(object sender, RoutedEventArgs e)
