@@ -3,21 +3,22 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AgencyManager.Views"
+        xmlns:local="clr-namespace:AgencyManager"
+        xmlns:components="clr-namespace:AgencyManager.Components"
         mc:Ignorable="d"
         Title="EditAgency" Height="300" Width="400">
     <Canvas>
         <StackPanel Canvas.Top="25" Canvas.Left="15" >
             <TextBlock FontWeight="Bold">Número</TextBlock>
-            <TextBox Name="TxtNumero" Width="350"></TextBox>
+            <components:ValidationTextBox x:Name="TxtNumero" Width="350"></components:ValidationTextBox>
             <TextBlock FontWeight="Bold">Nome</TextBlock>
-            <TextBox Name="TxtNome" Width="350"></TextBox>
+            <components:ValidationTextBox x:Name="TxtNome" Width="350"></components:ValidationTextBox>
             <TextBlock FontWeight="Bold">Telefone</TextBlock>
-            <TextBox Name="TxtTelefone" Width="350"></TextBox>
+            <components:ValidationTextBox x:Name="TxtTelefone" Width="350"></components:ValidationTextBox>
             <TextBlock FontWeight="Bold">Descrição</TextBlock>
-            <TextBox Name="TxtDescricao" Width="350"></TextBox>
+            <components:ValidationTextBox x:Name="TxtDescricao" Width="350"></components:ValidationTextBox>
             <TextBlock FontWeight="Bold">Endereço</TextBlock>
-            <TextBox Name="TxtEndereco" Width="350"></TextBox>
+            <components:ValidationTextBox x:Name="TxtEndereco" Width="350"></components:ValidationTextBox>
 
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Right"
