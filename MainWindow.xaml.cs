@@ -61,11 +61,9 @@ namespace AgencyManager
 
             EditAgency editAgency = new(_agencyListBox.SelectedAgency);
 
-            bool? result = editAgency.ShowDialog();
+            bool result = editAgency.ShowDialog()!.Value;
 
-            if(!result.HasValue) return;
-
-            if(result.Value)
+            if(result)
             {
                 // UPDATE
             }

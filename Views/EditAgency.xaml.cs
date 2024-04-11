@@ -41,18 +41,30 @@ namespace AgencyManager.Views
 
         private void BindCommands()
         {
-            BtnOk.Click += new RoutedEventHandler(BtnOk_Click);
-            BtnOk.Click += new RoutedEventHandler(CloseWindow);
+            RoutedEventHandler dialogResultTrue = (sender, e) => DialogResult = true;
+            RoutedEventHandler dialogResultFalse = (sender, e) => DialogResult = false;
 
-            BtnCancelar.Click += new RoutedEventHandler(BtnCancelar_Click);
-            BtnCancelar.Click += new RoutedEventHandler(CloseWindow);
+            RoutedEventHandler okEventHandler = dialogResultTrue + CloseWindow;
+            RoutedEventHandler cancelEventHandler = dialogResultFalse + CloseWindow;           
+
+            BtnOk.Click += okEventHandler;
+            BtnCancelar.Click += cancelEventHandler;
+
+            TxtNome.TextChanged += InputValidator_TextChanged;
+            TxtNumero.TextChanged += InputValidator_TextChanged;
+            TxtDescricao.TextChanged += InputValidator_TextChanged;
+            TxtEndereco.TextChanged += InputValidator_TextChanged;
+            TxtTelefone.TextChanged += InputValidator_TextChanged;
         }
 
-        private void BtnOk_Click(object sender, RoutedEventArgs e)
-            => DialogResult = true;        
+        private void InputValidator_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
 
-        private void BtnCancelar_Click(object sender, RoutedEventArgs e)
-            => DialogResult = false;        
+            textBox.Background = string.IsNullOrWhiteSpace(textBox.Text?.Trim()) ?
+                new SolidColorBrush(Colors.OrangeRed) :
+                new SolidColorBrush(Colors.White);
+        }
 
         private void CloseWindow(object sender, RoutedEventArgs e)
             => Close();
