@@ -45,23 +45,34 @@ namespace AgencyManager.Views
             RoutedEventHandler dialogResultFalse = (sender, e) => DialogResult = false;
 
             RoutedEventHandler okEventHandler = dialogResultTrue + CloseWindow;
-            RoutedEventHandler cancelEventHandler = dialogResultFalse + CloseWindow;           
+            RoutedEventHandler cancelEventHandler = dialogResultFalse + CloseWindow;
 
             BtnOk.Click += okEventHandler;
             BtnCancelar.Click += cancelEventHandler;
 
-            TxtNome.TextChanged += InputValidator_TextChanged;
-            TxtNumero.TextChanged += InputValidator_TextChanged;
-            TxtDescricao.TextChanged += InputValidator_TextChanged;
-            TxtEndereco.TextChanged += InputValidator_TextChanged;
-            TxtTelefone.TextChanged += InputValidator_TextChanged;
+            TxtNumero.TextChanged += NullInputValidator_TextChanged;
+            TxtNumero.TextChanged += NumberInputValidator_TextChanged;
+
+            TxtNome.TextChanged += NullInputValidator_TextChanged;
+            TxtDescricao.TextChanged += NullInputValidator_TextChanged;
+            TxtEndereco.TextChanged += NullInputValidator_TextChanged;
+            TxtTelefone.TextChanged += NullInputValidator_TextChanged;
         }
 
-        private void InputValidator_TextChanged(object sender, TextChangedEventArgs e)
+        private void NumberInputValidator_TextChanged(object sender, TextChangedEventArgs e)
         {
             TextBox textBox = (TextBox)sender;
 
-            textBox.Background = string.IsNullOrWhiteSpace(textBox.Text?.Trim()) ?
+            textBox.Background = !string.IsNullOrEmpty(textBox.Text?.Trim()) && textBox.Text.All(char.IsDigit) ?
+                new SolidColorBrush(Colors.White) :
+                new SolidColorBrush(Colors.OrangeRed);
+        }
+
+        private void NullInputValidator_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+
+            textBox.Background = string.IsNullOrEmpty(textBox.Text?.Trim()) ?
                 new SolidColorBrush(Colors.OrangeRed) :
                 new SolidColorBrush(Colors.White);
         }
