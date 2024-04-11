@@ -26,8 +26,8 @@ namespace AgencyManager.Views
         {
             InitializeComponent();
             _agency = agency ?? throw new ArgumentNullException(nameof(agency));
-            UpdateControls();
             BindCommands();
+            UpdateControls();
         }
 
         private void UpdateControls()
@@ -50,32 +50,20 @@ namespace AgencyManager.Views
             BtnOk.Click += okEventHandler;
             BtnCancelar.Click += cancelEventHandler;
 
-            TxtNumero.TextChanged += NullInputValidator_TextChanged;
-            TxtNumero.TextChanged += NumberInputValidator_TextChanged;
+            TxtNumero.ValidationEventHandler += NullInputValidator_TextChanged;
+            TxtNumero.ValidationEventHandler += NumberInputValidator_TextChanged;
 
-            TxtNome.TextChanged += NullInputValidator_TextChanged;
-            TxtDescricao.TextChanged += NullInputValidator_TextChanged;
-            TxtEndereco.TextChanged += NullInputValidator_TextChanged;
-            TxtTelefone.TextChanged += NullInputValidator_TextChanged;
+            TxtNome.ValidationEventHandler += NullInputValidator_TextChanged;
+            TxtDescricao.ValidationEventHandler += NullInputValidator_TextChanged;
+            TxtEndereco.ValidationEventHandler += NullInputValidator_TextChanged;
+            TxtTelefone.ValidationEventHandler += NullInputValidator_TextChanged;
         }
 
-        private void NumberInputValidator_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            TextBox textBox = (TextBox)sender;
+        private bool NumberInputValidator_TextChanged(string text)
+            => !string.IsNullOrEmpty(text?.Trim()) && text.All(char.IsDigit);
 
-            textBox.Background = !string.IsNullOrEmpty(textBox.Text?.Trim()) && textBox.Text.All(char.IsDigit) ?
-                new SolidColorBrush(Colors.White) :
-                new SolidColorBrush(Colors.OrangeRed);
-        }
-
-        private void NullInputValidator_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            TextBox textBox = (TextBox)sender;
-
-            textBox.Background = string.IsNullOrEmpty(textBox.Text?.Trim()) ?
-                new SolidColorBrush(Colors.OrangeRed) :
-                new SolidColorBrush(Colors.White);
-        }
+        private bool NullInputValidator_TextChanged(string text)
+            => !string.IsNullOrEmpty(text?.Trim());
 
         private void CloseWindow(object sender, RoutedEventArgs e)
             => Close();
