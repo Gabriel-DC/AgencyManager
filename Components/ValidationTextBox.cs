@@ -24,20 +24,29 @@ namespace AgencyManager.Components
             remove => _validationEventHandler -= value;            
         }
 
-        public ValidationTextBox()
+        protected override void OnTextChanged(TextChangedEventArgs e)
         {
-            TextChanged += ValidationTextBox_TextChanged;
+            base.OnTextChanged(e);
+            OnValidation();
         }
-
-        private void ValidationTextBox_TextChanged(object sender, TextChangedEventArgs e)
-            => OnValidation();
 
         private void OnValidation()
         {
             if (_validationEventHandler is null)
                 return;
 
-            bool isValid = _validationEventHandler(Text);
+            bool isValid = true;
+            Delegate[] delegates = _validationEventHandler.GetInvocationList();
+
+            foreach (ValidationEventHandler validationDelegate in delegates )
+            {
+                if (!validationDelegate(Text))
+                {
+                    isValid = false;
+                    break;
+                }
+            }
+            
 
             Background = isValid
                 ? new SolidColorBrush(Colors.White)

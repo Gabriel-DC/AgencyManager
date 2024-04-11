@@ -60,7 +60,7 @@ namespace AgencyManager.Views
         }
 
         private bool NumberInputValidator_TextChanged(string text)
-            => !string.IsNullOrEmpty(text?.Trim()) && text.All(char.IsDigit);
+            => text.All(char.IsDigit);
 
         private bool NullInputValidator_TextChanged(string text)
             => !string.IsNullOrEmpty(text?.Trim());
