@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AgencyManager.EventsArgs;
 using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace AgencyManager.Components
 {
-    public delegate bool ValidationEventHandler(string text);
+    public delegate void ValidationEventHandler(object sender, ValidationEventArgs e);
 
     public class ValidationTextBox : TextBox
     {
@@ -21,7 +17,7 @@ namespace AgencyManager.Components
                 _validationEventHandler += value;
                 OnValidation();
             }
-            remove => _validationEventHandler -= value;            
+            remove => _validationEventHandler -= value;
         }
 
         protected override void OnTextChanged(TextChangedEventArgs e)
@@ -35,12 +31,16 @@ namespace AgencyManager.Components
             if (_validationEventHandler is null)
                 return;
 
+            ValidationEventArgs eventArgs = new(Text);
             bool isValid = true;
+            
             Delegate[] delegates = _validationEventHandler.GetInvocationList();
 
-            foreach (ValidationEventHandler validationDelegate in delegates )
+            foreach (ValidationEventHandler validationDelegate in delegates)
             {
-                if (!validationDelegate(Text))
+                 validationDelegate(this, eventArgs);
+
+                if (!eventArgs.IsValid)
                 {
                     isValid = false;
                     break;

@@ -1,4 +1,5 @@
-﻿using AgencyManager.Models;
+﻿using AgencyManager.EventsArgs;
+using AgencyManager.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,11 +60,11 @@ namespace AgencyManager.Views
             TxtTelefone.ValidationEventHandler += NullInputValidator_TextChanged;
         }
 
-        private bool NumberInputValidator_TextChanged(string text)
-            => text.All(char.IsDigit);
+        private void NumberInputValidator_TextChanged(object sender, ValidationEventArgs e)
+            => e.IsValid = e.Text.All(char.IsDigit);
 
-        private bool NullInputValidator_TextChanged(string text)
-            => !string.IsNullOrEmpty(text?.Trim());
+        private void NullInputValidator_TextChanged(object sender, ValidationEventArgs e)
+            => e.IsValid = !string.IsNullOrEmpty(e.Text?.Trim());
 
         private void CloseWindow(object sender, RoutedEventArgs e)
             => Close();
